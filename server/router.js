@@ -7,10 +7,15 @@ const router = (app) => {
           mid.requiresSecure,
           mid.requiresLogout,
           controllers.Account.loginPage);
+  app.get('/getToken',
+          mid.requiresSecure,
+          controllers.Account.getToken);
+  /*
   app.get('/signup',
           mid.requiresSecure,
           mid.requiresLogout,
           controllers.Account.signupPage);
+  /**/
   app.get('/logout',
           mid.requiresLogin,
           controllers.Account.logout);

@@ -6,11 +6,6 @@ const loginPage = (rq, rp) => {
   rp.render('login', { csrfToken: rq.csrfToken() });
 };
 
-// signupPage()
-const signupPage = (rq, rp) => {
-  rp.render('signup', { csrfToken: rq.csrfToken() });
-};
-
 // logout()
 const logout = (rq, rp) => {
   rq.session.destroy();
@@ -90,11 +85,23 @@ const signup = (request, response) => {
   });
 };
 
+// getToken()
+const getToken = (req, resp) => {
+  const rq = req;
+  const rp = resp;
+
+  const csrfJSON = {
+    csrfToken: rq.csrfToken(),
+  };
+
+  rp.json(csrfJSON);
+};
+
 // Exports
 module.exports = {
   loginPage,
   login,
   logout,
-  signupPage,
   signup,
+  getToken,
 };
