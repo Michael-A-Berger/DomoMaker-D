@@ -32,6 +32,22 @@ const makeDomo = (rq, rp) => {
   return domoPromise;
 };
 
+// getDomos()
+const getDomos = (request, response) => {
+  const rq = request;
+  const rp = response;
+
+  // Actually getting the Domos
+  return Domo.DomoModel.findByOwner(rq.session.account._id, (err, docs) => {
+    if (err) {
+      console.log(err);
+      return rp.status(400).json({ error: 'An error occurred' });
+    }
+
+    return rp.json({ domos: docs });
+  });
+};
+
 // makerPage()
 const makerPage = (rq, rp) => {
   Domo.DomoModel.findByOwner(rq.session.account._id, (err, docs) => {
@@ -50,5 +66,6 @@ const makerPage = (rq, rp) => {
 // The Domo Controller exports
 module.exports = {
   makerPage,
+  getDomos,
   make: makeDomo,
 };

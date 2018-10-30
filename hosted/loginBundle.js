@@ -26,13 +26,13 @@ var handleSignup = function handleSignup(e) {
   $('#domoMessage').animate({ width: 'hide' }, 350);
 
   // IF not all of the fields are filled in...
-  if ($('#user').val() == '' || $('#pass').val() == '' || $('#pass2').vl() == '') {
+  if ($('#user').val() == '' || $('#pass').val() == '' || $('#pass2').val() == '') {
     handleError("RAWR! All fields are required");
     return false;
   }
 
   // IF both password fields are not the same...
-  if ($('#pass').val() !== $('#pass2')) {
+  if ($('#pass').val() !== $('#pass2').val()) {
     handleError("RAWR! Passwords do not match");
     return false;
   }
@@ -167,6 +167,7 @@ var sendAjax = function sendAjax(type, action, data, success) {
     url: action,
     data: data,
     dataType: 'json',
+    success: success,
     error: function error(xhr, status, _error) {
       var msgObj = JSON.parse(xhr.responseText);
       handleError(msgObj.error);
